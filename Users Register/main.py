@@ -1,5 +1,16 @@
 import time
 
+def loading():
+    for i in range(1, 5):
+        print(".", end="")
+        time.sleep(1)
+        print(".", end="")
+        time.sleep(1)
+        print(".", end="")
+        time.sleep(1)
+
+    print("Complete")
+
 def set_new_user():
     user_id = len(user_list) + 1
 
@@ -26,7 +37,9 @@ def edit_an_user():
     while True:
         user_to_edit_id = int(input("Inform the ID of the user you want to edit: "))
 
+        print("\n------------------------------------------------------------------------------------------------")
         print(f"Current user data: {user_list[user_to_edit_id - 1]}")
+        print("\n------------------------------------------------------------------------------------------------ \n")
         
         item_to_change = str(input("Choose an item to change: \n[N] - Name | [A] - Age | [C] - Contact: \nOption: "))
 
@@ -45,10 +58,22 @@ def edit_an_user():
 
             user_list[user_to_edit_id - 1]["contact"] = new_user_contact
 
+        print("\n------------------------------------------------------------------------------------------------")
         print(f"Updated user data: {user_list[user_to_edit_id - 1]}")
+        print("\n------------------------------------------------------------------------------------------------ \n")
 
-        continue_or_close = str(input("All the informations it's correct? \n[Y] - Yes. Close the user editor. | [N] - No"))
+        save_change = str(input("All the informations it's correct? \n[Y] - Yes. Close the user editor. | [N] - No: \nOption: "))
 
+        if save_change in "Yy":
+            print("Saving all the changes")
+
+            loading()
+
+            break
+        
+        elif save_change in "Nn":
+            continue
+            
 def show_users_list():
     for i in range(len(user_list)):
         print("------------------------------------------------------------------------------------------------")
@@ -69,10 +94,10 @@ while True:
     if action == 1:
         set_new_user()
 
-    elif action == 3:
+    elif action == 2:
         show_users_list()
 
-        
+        edit_an_user()
 
     elif action == 4:
         show_users_list()
@@ -80,7 +105,7 @@ while True:
     elif action == 5:
         print("Closing application")
 
-        time.sleep(2)
+        loading()
 
         print("See you later")
 
